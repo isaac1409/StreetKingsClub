@@ -24,7 +24,8 @@ def loginPage():
                     size="3",
                     width="300px",
                 ),
-                rx.button("Iniciar Sesión", on_click=AuthState.login, size="3", width="10em"),
+                rx.script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11"),
+                rx.button("Iniciar Sesión", on_click=AuthState.login, size="3", width="10em", style={"background_color": "#3085d6"},),
                 spacing="4",
                 align_items="center",
             )),
@@ -46,4 +47,5 @@ def loginPage():
             "backgroundRepeat": "no-repeat",    
             "height": "100vh",                 
         },
+        on_mount=AuthState.check_login
     )
