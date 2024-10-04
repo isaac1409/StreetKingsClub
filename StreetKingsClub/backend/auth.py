@@ -3,7 +3,6 @@ from ..modelos import Usuario
 from ..database import get_session
 from sqlmodel import select
 
-
 class AuthState(rx.State):
     usuario : str = ""
     password : str = ""
@@ -34,13 +33,25 @@ class AuthState(rx.State):
             ).first()
             if user and user.Password == self.password:
                 self.usuario = user.Username
+                yield AuthState.mostrarAlerta("Sesión iniciada", f"Bienvenido a tu portal, {user.Nombre}","success")
                 return rx.redirect("/") 
             else:
-                return rx.window_alert("Usuario o contraseña inválida")
-
+                return AuthState.mostrarAlerta("Error", "Verifica tus credenciales", "error")
+            
     def get_users(self):
         with get_session() as session:
             users = session.exec(Usuario).all()
             return users
-
-
+    
+    def mostrarAlerta(self, titulo, texto, tipo):
+        return rx.call_script(
+                        "Swal.fire({"
+                        f"title: '{titulo}',"
+                        f"text: '{texto}',"
+                        f"icon: '{tipo}',"
+                        "confirmButtonText: 'OK',"
+                        "confirmButtonColor: '#3085d6',"
+                        "})"
+                    )
+        
+    
