@@ -47,4 +47,5 @@ def loginPage():
             "backgroundRepeat": "no-repeat",    
             "height": "100vh",                 
         },
+        on_mount=AuthState.check_login
     )

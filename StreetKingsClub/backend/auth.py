@@ -15,6 +15,8 @@ class AuthState(rx.State):
     def check_login(self):
         if not self.logged_in:
             return rx.redirect("/login")
+        else:
+            return rx.redirect("/")
         
     @rx.var
     def logged_in(self) -> bool:
