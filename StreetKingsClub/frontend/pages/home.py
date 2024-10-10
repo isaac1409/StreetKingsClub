@@ -3,6 +3,7 @@ from rxconfig import config
 
 def home() -> rx.Component:
     return rx.container(
+        rx.script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11"),
         rx.vstack(
             rx.heading("Welcome to Reflex!", size="9"),
             rx.text(

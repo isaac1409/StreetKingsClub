@@ -1,1 +1,7 @@
 reflex==0.5.6
+bcrypt==3.2.0
+sqlmodel
+cryptography
+passlib
+PyJWT
+secrets
