@@ -2,6 +2,7 @@ from sqlmodel import select
 from ..database import get_session
 from ..modelos import Usuario
 from passlib.context import CryptContext
+import pandas as pd
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -12,7 +13,7 @@ def get_usuarios():
     try:
         with get_session() as session:  
             usuarios = session.exec(select(Usuario)).all()
-            return usuarios
+            return pd.DataFrame([(u.Nombre, u.Username) for u in usuarios], columns=["Nombre", "Usuario"])
     except Exception as e:
         session.rollback()
         raise Exception(f"Error al obtener los usuarios")

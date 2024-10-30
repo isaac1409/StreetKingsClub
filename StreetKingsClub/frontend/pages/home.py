@@ -1,9 +1,11 @@
 import reflex as rx
 from rxconfig import config
+from ...backend.auth import AuthState
+from ..templates.formularios import template
 
 def home() -> rx.Component:
-    return rx.container(
-        rx.script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11"),
+    return template(
+        #rx.color_mode.button(position="top-right"),
         rx.vstack(
             rx.heading("Welcome to Reflex!", size="9"),
             rx.text(
@@ -16,6 +18,7 @@ def home() -> rx.Component:
                 href="https://reflex.dev/docs/getting-started/introduction/",
                 is_external=True,
             ),
+            rx.button("Cerrar Sesión", on_click=AuthState.logout),
             spacing="5",
             justify="center",
             min_height="85vh",

@@ -1,24 +1,37 @@
 import reflex as rx
-from reflex import route
 from ...backend.usuarios import get_usuario, get_usuarios, crear_usuario, editar_usuario, delete_usuario
 from ...backend.auth import AuthState
+from ...frontend.templates.formularios import template
 
-def index():
-    return rx.flex(
+def indexUsuarios():
+    return template(
+        #rx.color_mode.button(position="top-right"),
+        rx.heading("Usuarios", size="9",),
         rx.script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11"),
-        rx.button("Cerrar Sesión", on_click=AuthState.logout),
-        width="100vw",
-        height="100vh",
+        rx.data_table(
+            data=get_usuarios(),
+            pagination=False,
+            search=True, 
+            sort=True,
+        ),
     )
 
-def detalles():
-    return rx.flex()
+def detallesUsuario():
+    return template(
+        rx.color_mode.button(position="top-right"),
+    )
 
-def crear():
-    return rx.flex()
+def crearUsuario():
+    return template(
+        rx.color_mode.button(position="top-right"),
+    )
 
-def editar():
-    return rx.flex()
+def editarUsuario():
+    return template(
+        rx.color_mode.button(position="top-right"),
+    )
 
-def eliminar():
-    return rx.flex()
+def eliminarUsuario():
+    return template(
+        rx.color_mode.button(position="top-right"),
+    )
